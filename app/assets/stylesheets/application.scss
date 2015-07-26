@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+/** Include Bootstrap */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/** Create Columns for DB and Nav */
+.app {
+  margin: 20px auto;
+  width: 100%;
+  max-wdith: 960px;
+}
+
+article[role="main"] {
+  float: left;
+  width: 600px / 960px * 100%;
+}
+
+nav[role="nav"] {
+  float: right;
+  width: 300px / 960px * 100%;
+}
