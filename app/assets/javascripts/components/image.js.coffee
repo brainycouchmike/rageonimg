@@ -1,4 +1,6 @@
-# app/assets/javascripts/components/image.js.coffee
+# app/assets/javascripts/components/image.js.jsx.coffee
+
+# @jsx React.DOM
 
 @Image = React.createClass
   render: ->

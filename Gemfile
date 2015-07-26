@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'coffee-react'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+# Use Babel Transpiler
+gem 'babel-transpiler'
 # React Rail
 gem 'react-rails'
 # React Bootstrap

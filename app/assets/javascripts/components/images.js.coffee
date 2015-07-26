@@ -1,5 +1,6 @@
-# app/assets/javascript/components/images.js.coffee
-# @cjsx React.DOM
+# app/assets/javascript/components/images.js.jsx.coffee
+
+# @jsx React.DOM
 
 @Images = React.createClass
   getInitialState: ->
