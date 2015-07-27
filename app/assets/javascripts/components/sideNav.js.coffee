@@ -20,10 +20,10 @@
           className: "active"
           React.DOM.a
             href: "#"
-            "Home"
+            " Image Database "
         React.DOM.li
           role: "presentation"
           className: ""
           React.DOM.a
             href: "#"
-            "Update"
+            " Update Images "

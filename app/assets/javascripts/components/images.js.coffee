@@ -22,9 +22,11 @@
           className: 'table table-bordered'
           React.DOM.thead null,
             React.DOM.tr null,
-              React.DOM.th null, 'Date'
-              React.DOM.th null, 'Title'
-              React.DOM.th null, 'Link'
+              React.DOM.th null, 'ID'
+              React.DOM.th null, 'Updated'
+              React.DOM.th null, 'Modified'
+              React.DOM.th null, 'URL'
+              React.DOM.th null, 'Path'
           React.DOM.tbody null,
             for img in @state.images
               React.createElement Image, key: img.id, image: img
