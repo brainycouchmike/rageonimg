@@ -7,6 +7,9 @@
     links: @props.data
   getDefaultProps: ->
     links: []
+  handleClick: (e) ->
+    e.preventDefault()
+    alert "clicked it"
   render: ->
     React.DOM.nav
       role: "nav"
@@ -20,6 +23,7 @@
           className: "active"
           React.DOM.a
             href: "#"
+            onClick: @handleClick
             " Image Database "
         React.DOM.li
           role: "presentation"
