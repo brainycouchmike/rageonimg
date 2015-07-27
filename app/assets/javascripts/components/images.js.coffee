@@ -7,6 +7,8 @@
     images: @props.data
   getDefaultProps: ->
     images: []
+  updateImageDatabase: (newData) ->
+    @setState images: newData
   render: ->
     React.DOM.div
       className: "app"
