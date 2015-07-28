@@ -1,4 +1,4 @@
-# app/assets/javascript/components/images.js.jsx.coffee
+# app/assets/javascript/components/images.js.coffee
 
 # @jsx React.DOM
 
@@ -28,7 +28,7 @@
           className: "title"
           " Image Database: "
         React.DOM.table
-          className: 'table table-bordered'
+          className: 'table table-bordered table-striped table-hover'
           React.DOM.thead null,
             React.DOM.tr null,
               React.DOM.th null, 'ID'

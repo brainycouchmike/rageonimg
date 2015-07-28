@@ -1,4 +1,4 @@
-# app/assets/javascripts/components/image.js.jsx.coffee
+# app/assets/javascripts/components/image.js.coffee
 
 # @jsx React.DOM
 
