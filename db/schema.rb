@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728024952) do
+ActiveRecord::Schema.define(version: 20150728162756) do
 
   create_table "action_links", force: :cascade do |t|
     t.string   "url",         default: "#",          null: false
@@ -22,20 +22,15 @@ ActiveRecord::Schema.define(version: 20150728024952) do
   end
 
   create_table "images", id: false, force: :cascade do |t|
-    t.integer  "id"
+    t.integer  "id",          limit: 8
     t.integer  "product_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "position"
     t.text     "variant_ids"
     t.string   "src"
     t.string   "path"
-    t.datetime "lastmod",     null: false
-  end
-
-  create_table "shopifies", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "lastmod",               null: false
   end
 
 end

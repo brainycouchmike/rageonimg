@@ -10,7 +10,11 @@ ActionLinks = ActionLink.create([{
   params: '',
   anchor_text: 'Image Database'
 },{
-  url: '/api/fetch/all',
+  url: '/fetch',
   params: '',
   anchor_text: 'Database Update: Fetch'
+},{
+  url:'/push',
+  params: '',
+  anchor_text: 'Database Update: Push'
 }])

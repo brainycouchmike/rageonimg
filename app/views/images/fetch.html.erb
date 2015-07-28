@@ -1,12 +1,12 @@
 <%# app/views/fetch.html.erb %>
 
-<%=@products.inspect %>
+<%#= @products.first.inspect %>
 <% p_count = 0 %>
-<% for product in @products %>
-<% image = product.images[0] %>
-<div><%= "#{image.id}: <a href='"+image.src+"'>"+image.src+"</a>" %>
-  <div> <%#= result %>
-  <div><%#= product.images.inspect if p_count<1 %></div>
-<%
-  p_count+=1
-end %>
+<%# for product in @products %>
+<%# image = product.images[0] %>
+  <div><%#= "#{image.id}: <a href='"+image.src+"'>"+image.src+"</a>" %></div>
+  <div><%= @result %></div>
+<div><%#= image.inspect if p_count<1 %></div>
+<%#
+#  p_count+=1
+#end %>

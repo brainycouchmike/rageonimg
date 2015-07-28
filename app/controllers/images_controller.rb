@@ -23,25 +23,31 @@ class ImagesController < ApplicationController
     shop_url  = "https://#{@API_KEY}:#{@PASSWORD}@#{@STORE}.myshopify.com/admin"
     ShopifyAPI::Base.site = shop_url
     @products = ShopifyAPI::Product.find(:all)
-#     for product in @products
-#       pimage = product.images
-#       db_hash = {
-#         id: pimage.id,
-#         product_id: product.id,
-#         created_at: pimage.created_at,
-#         updated_at: pimage.updated_at,
-#         position: pimage.position,
-#         variant_ids: pimage.variant_ids.to_s,
-#         src: pimage.src,
-#         path: "~/images/"+File.basename(URI.parse(pimage.src).path),
-#         lastmod: Datetime.now,
-#       }
-#       if !Image.find(product.image.id) then
-#         @result = Image.new(db_hash)
-#       else
-#         @result = Image.udpate("#{products.image.id}" => db_hash)
-#       end
-#     end
+    @result   = []
+    base_path = "/Users/staff/Documents/Projects/RageOnImgMgmt/"
+    for product in @products
+      pimage = product.images[0]
+      db_hash = {
+        id: pimage.id,
+        product_id: product.id,
+        created_at: pimage.created_at,
+        updated_at: pimage.updated_at,
+        position: pimage.position,
+        variant_ids: pimage.variant_ids.to_s,
+        src: pimage.src,
+        path: base_path+product.product_type+File.basename(URI.parse(pimage.src).path),
+        lastmod: DateTime.now,
+      }
+      byebug
+      if !Image.find_by(id: pimage.id) then
+        @result.push(Image.new(db_hash).save)
+      else
+        img = Image.find_by(id: pimage.id)
+        if img.updated_at != pimage.updated_at
+          @result.push(Image.udpate("#{pimage.id}" => db_hash).save)
+        end
+      end
+    end
   end
   private
   def image_params
