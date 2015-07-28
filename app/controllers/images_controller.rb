@@ -12,12 +12,36 @@ class ImagesController < ApplicationController
     end
   end
   def fetch
+    # Testing Store
     @API_KEY  = "17d3ac47dcddfbd5dec5e0b37cdf1d7d"
     @PASSWORD = "40cd7a26b4fab736d095bf415ad1b1bf"
     @STORE    = "brainycouch"
+    # RageOn Production Store
+    # @API_KEY = "a9d91bd9550a48555088054dc7d54fc6"
+    # @PASSWORD = "0bfcdcd24b8bb89927104663fb916f65"
+    # @STORE    = "rageon"
     shop_url  = "https://#{@API_KEY}:#{@PASSWORD}@#{@STORE}.myshopify.com/admin"
     ShopifyAPI::Base.site = shop_url
     @products = ShopifyAPI::Product.find(:all)
+#     for product in @products
+#       pimage = product.images
+#       db_hash = {
+#         id: pimage.id,
+#         product_id: product.id,
+#         created_at: pimage.created_at,
+#         updated_at: pimage.updated_at,
+#         position: pimage.position,
+#         variant_ids: pimage.variant_ids.to_s,
+#         src: pimage.src,
+#         path: "~/images/"+File.basename(URI.parse(pimage.src).path),
+#         lastmod: Datetime.now,
+#       }
+#       if !Image.find(product.image.id) then
+#         @result = Image.new(db_hash)
+#       else
+#         @result = Image.udpate("#{products.image.id}" => db_hash)
+#       end
+#     end
   end
   private
   def image_params
