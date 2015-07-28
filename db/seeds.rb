@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+ActionLinks = ActionLink.create([{
+  url: '/',
+  params: '',
+  anchor_text: 'Image Database'
+},{
+  url: '/api/fetch/all',
+  params: '',
+  anchor_text: 'Database Update: Fetch'
+}])

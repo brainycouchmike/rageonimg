@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
   def index
     @images = Image.all
+    @links  = ActionLink.all
   end
   def create
     @image = Image.new(image_params)
