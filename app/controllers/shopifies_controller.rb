@@ -1,0 +1,2 @@
+class ShopifiesController < ApplicationController
+end

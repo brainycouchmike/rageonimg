@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727223605) do
+ActiveRecord::Schema.define(version: 20150728024952) do
 
   create_table "action_links", force: :cascade do |t|
-    t.string   "url"         , null: false, default: "#"
-    t.text     "params"      , null: false, default: ""
-    t.string   "anchor_text" , null: false, default: "Click Here"
-    t.datetime "created_at"  , null: false
-    t.datetime "updated_at"  , null: false
+    t.string   "url",         default: "#",          null: false
+    t.text     "params",      default: "",           null: false
+    t.string   "anchor_text", default: "Click Here", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "images", id: false, force: :cascade do |t|
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20150727223605) do
     t.string   "src"
     t.string   "path"
     t.datetime "lastmod",     null: false
+  end
+
+  create_table "shopifies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

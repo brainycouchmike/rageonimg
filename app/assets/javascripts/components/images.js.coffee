@@ -47,8 +47,5 @@
         React.DOM.ul
           className: "nav nav-pills stacked"
           for link, i in @props.links
-            React.createElement ActionLink,
-              data: link
-              is_active: i==0
-              callback: @updateDatabase
+            React.createElement ActionLink data: link, is_active: i==0, callback: @updateDatabase
         

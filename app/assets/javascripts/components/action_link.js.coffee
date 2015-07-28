@@ -18,7 +18,9 @@
       console.log data
   handleClick: (e) ->
     e.preventDefault()
-    $.get @props.data.href, @props.reqData, (data) ->
+    return @props.callback null if @props.data.url
+    $.get @props.data.url, @props.reqData, (data) ->
+      console.debug data
       @props.callback data
       @setState active: true, response: data
     , 'JSON'
