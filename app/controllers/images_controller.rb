@@ -22,11 +22,26 @@ class ImagesController < ApplicationController
     @STORE    = "rageon"
     shop_url  = "https://#{@API_KEY}:#{@PASSWORD}@#{@STORE}.myshopify.com/admin"
     ShopifyAPI::Base.site = shop_url
-    @products = ShopifyAPI::Product.find(:all)
-    @result   = []
-    base_path = "/home/nitrous/code/rage/app/assets/images/RageOnImgMgmt/"
+    @products = []
+    @results  = []
+    @total    = 0
+    @errors   = 0
+    @success  = 0
+    base_path = File.expand_path('../assets/images/RageOnImgMgmt/', __FILE__)
+    page      = 1
+    count     = ShopifyAPI::Product.count
+    if count > 0 then
+      page += count.divmod(250).first
+      while page > 0 do
+        @products += ShopifyAPI::Product.find(:all, :params => {:limit => 250})
+        page -= 1
+      end
+    end
+    @count = count
+    @procd = @products.length
+    #byebug
     for product in @products
-      pimage = product.images[0]
+      pimage = product.images.first
       db_hash = {
         id: pimage.id,
         product_id: product.id,
@@ -35,23 +50,47 @@ class ImagesController < ApplicationController
         position: pimage.position,
         variant_ids: pimage.variant_ids.to_s,
         src: pimage.src,
-        path: base_path+product.product_type+"/"+File.basename(URI.parse(pimage.src).path),
+        path: base_path+"/"+product.product_type+"/"+File.basename(URI.parse(pimage.src).path),
         lastmod: DateTime.now,
       }
       # byebug
+      img = nil
+      act = ""
       if !Image.find_by(id: pimage.id) then
-        save_res = (nimage = Image.new(db_hash)).save
-        down_res = if !save_res then false else nimage.download end
-        @result.push({pimage.id => {"save"=>save_res, "dl"=>false}})
-      else
+        act "new"
+        save_res = (img = Image.new(db_hash)).save
+        # down_res = if !save_res then false else img.download end
+        # @results.push({pimage.id => {"save"=>save_res, "dl"=>false}})
+      else # Image found in database, check for update
         img = Image.find_by(id: pimage.id)
-        if img.updated_at != pimage.updated_at || img.path != db_hash[:path]
+        if img != Image.new(db_hash) then
+          act = "update"
           updt_res = img.update(db_hash)
-          down_res = if !updt_res then false else img.download end
-          @result.push({pimage.id => {"update"=>updt_res, "dl"=>false}})
+          #down_res = if !updt_res then false else img.download end
+          #@results.push({pimage.id => {"update"=>updt_res, "dl"=>down_res}})
+        else # They're the same, no need to update
+          act = "no-update"
         end
       end
+      #code = img.download
+      @results.push({img.id=>{"image"=>img,"action"=>act}})
+      # Render on Download error (stop downloading if it's not working)
+      # if !code.nil? and code != 200
+      # render :fetch and return
+      # Increment a total  
+      @total+=1
     end
+        @images = Image.all
+        @links  = ActionLink.all
+  end
+      
+      def download
+        @image = Image.find(params[:img].id)
+        @code  = @image.download
+      end
+      
+  def push
+    
   end
   private
   def image_params

@@ -1,12 +1,11 @@
 <%# app/views/fetch.html.erb %>
 
 <%#= @products.first.inspect %>
-<% p_count = 0 %>
-<%# for product in @products %>
-<%# image = product.images[0] %>
-  <div><%#= "#{image.id}: <a href='"+image.src+"'>"+image.src+"</a>" %></div>
-  <div><%= @result %></div>
-<div><%#= image.inspect if p_count<1 %></div>
-<%#
-#  p_count+=1
-#end %>
+<h2>Image Fetch for RageOn Product Image Management</h2>
+<h3><%= @count %> Total Products Found</h3>
+<h3><%= @procd %> Total Products Assessed</h3>
+<h3>Completed <%= @total %> Requests:</h3>
+<%# for result in @results %>
+<div><%#= result %></div>
+<%# end %>
+<%= react_component 'Images', { data: @images, links: @links} %>

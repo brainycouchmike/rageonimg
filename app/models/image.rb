@@ -11,10 +11,13 @@ class Image < ActiveRecord::Base
     unless File.directory?(dir)
       FileUtils.mkdir_p(dir)
     end
+    code = 000;
     Net::HTTP.start(uri.host) do |http|
-      f = File.open(self.path, File::WRONLY|File::CREAT)
+      f = File.open(self.path, File::RDWR|File::CREAT, 0644)
+      f.binmode
       begin
         http.request_get(uri.path) do |resp|
+          code = resp.code
           resp.read_body do |segment|
             f.binmode
             f.write(segment.to_blob)
@@ -24,5 +27,6 @@ class Image < ActiveRecord::Base
         f.close()
       end
     end
+    return code
   end
 end

@@ -18,12 +18,19 @@
       console.log data
   handleClick: (e) ->
     e.preventDefault()
-    return @props.callback null if @props.data.url
-    $.get @props.data.url, @props.reqData, (data) ->
-      console.debug data
-      @props.callback data
-      @setState active: true, response: data
-    , 'JSON'
+    if !@props.data.url
+      return @props.callback null
+    if @props.data.url == "/download"
+      $('.img-row').each (dex, elem) ->
+        $.get @props.data.url, {img:{id:$(elem).find('td:first').text()}}, (data) ->
+          console.info data
+        , 'JSON'
+    else
+      $.get @props.data.url, @props.reqData, (data) ->
+        console.debug data
+        @props.callback data
+        @setState active: true, response: data
+      , 'JSON'
   render: ->
     React.DOM.li
       role: "presentation"
