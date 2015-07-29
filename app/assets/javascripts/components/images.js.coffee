@@ -32,9 +32,8 @@
           React.DOM.thead null,
             React.DOM.tr null,
               React.DOM.th null, 'ID'
-              React.DOM.th null, 'Updated'
               React.DOM.th null, 'Modified'
-              React.DOM.th null, 'URL'
+              React.DOM.th null, 'Image'
               React.DOM.th null, 'Path'
           React.DOM.tbody null,
             for img in @state.images

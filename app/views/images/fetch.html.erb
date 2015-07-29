@@ -5,7 +5,9 @@
 <h3><%= @count %> Total Products Found</h3>
 <h3><%= @procd %> Total Products Assessed</h3>
 <h3>Completed <%= @total %> Requests:</h3>
-<%# for result in @results %>
-<div><%#= result %></div>
-<%# end %>
+<div id="results" style="display: none">
+  <% @results.each_with_index do |result, rcount| %>
+  <div id="result_<%= rcount %>"><%= result.to_json %></div>
+  <% end %>
+</div>
 <%= react_component 'Images', { data: @images, links: @links} %>

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'images#index'
   
-  get '/fetch' => 'images#fetch'
+  get '/fetch'    => 'images#fetch'
+  get '/push'     => 'images#push'
+  get '/download' => 'images#download'
   
 
   # Example of regular route:

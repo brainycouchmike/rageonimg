@@ -18,17 +18,23 @@
       console.log data
   handleClick: (e) ->
     e.preventDefault()
-    if !@props.data.url
-      return @props.callback null
-    if @props.data.url == "/download"
-      $('.img-row').each (dex, elem) ->
-        $.get @props.data.url, {img:{id:$(elem).find('td:first').text()}}, (data) ->
-          console.info data
-        , 'JSON'
+    btn_props = @props
+    if !btn_props.data.url
+      return btn_props.callback null
+    if btn_props.data.url == "/download"
+      $('.image-row').each (dex, elem) ->
+        $.ajax
+          url:  btn_props.data.url
+          data: img:
+            id: $(elem).find('td:first').text()
+          type: 'GET'
+          dataType: 'JSON'
+          success: (data) ->
+            console.info data
     else
-      $.get @props.data.url, @props.reqData, (data) ->
+      $.get btn_props.data.url, btn_props.reqData, (data) ->
         console.debug data
-        @props.callback data
+        btn_props.callback data
         @setState active: true, response: data
       , 'JSON'
   render: ->
