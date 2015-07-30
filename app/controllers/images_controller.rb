@@ -138,15 +138,14 @@ class ImagesController < ApplicationController
       simage = product.images[img.id]
       img_data = open(img.path) { |io| io.read }
       filename = File.basename(img.path)
-      simage.attach_image(img_data,)
+      simage.attach_image(img_data, filename)
+      @result = simage.save
     end
       
-        
-    
   end
   # Private Method
   private
   def image_params
-    params.require(:image).permit(:title,:date)
+    params.require(:image).permit(:id,:product_id,:created_at,:updated_at,:position,:variant_ids,:src,:path,:lastmod,:store)
   end
 end

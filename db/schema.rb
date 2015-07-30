@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728162756) do
+ActiveRecord::Schema.define(version: 20150729215932) do
 
   create_table "action_links", force: :cascade do |t|
     t.string   "url",         default: "#",          null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150728162756) do
     t.string   "src"
     t.string   "path"
     t.datetime "lastmod",               null: false
+    t.string   "store"
   end
 
 end
